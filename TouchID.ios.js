@@ -40,6 +40,39 @@ export default {
         resolve(true);
       });
     });
+  },
+  isSupportedPasscode() {
+    return new Promise(function(resolve, reject) {
+      NativePasscodeAuth.isSupportedPasscode(function(error) {
+        if (error) {
+          return reject(createError(error.message));
+        }
+
+        resolve(true);
+      });
+    });
+  },
+  authenticatePasscode(reason) {
+    var authReason;
+
+    // Set auth reason
+    if (reason) {
+      authReason = reason;
+    // Set as empty string if no reason is passed
+    } else {
+      authReason = ' ';
+    }
+
+    return new Promise(function(resolve, reject) {
+      NativeTouchID.authenticatePasscode(authReason, function(error) {
+        // Return error if rejected
+        if (error) {
+          return reject(createError(error.message));
+        }
+
+        resolve(true);
+      });
+    });
   }
 };
 
