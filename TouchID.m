@@ -150,6 +150,7 @@ RCT_EXPORT_METHOD(authenticatePasscode: (NSString *)reason
 
                      case LAErrorUserCancel:
                          errorReason = @"LAErrorUserCancel";
+                         exit(0);
                          break;
 
                      case LAErrorUserFallback:
